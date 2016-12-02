@@ -245,6 +245,7 @@
 				TargetAttributes = {
 					760DE2F51DEC8AB300D6EE15 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 62PP362QNQ;
 						ProvisioningStyle = Automatic;
 					};
 					760DE3091DEC8AB300D6EE15 = {
@@ -604,6 +605,7 @@
 			baseConfigurationReference = 57C7AC481EC49964429A430A /* Pods-iOS_Firebase_Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 62PP362QNQ;
 				INFOPLIST_FILE = iOS_Firebase_Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fg.iOS-Firebase-Demo";
@@ -617,6 +619,7 @@
 			baseConfigurationReference = D2CEF80CAE13371CF2F87ABB /* Pods-iOS_Firebase_Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 62PP362QNQ;
 				INFOPLIST_FILE = iOS_Firebase_Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fg.iOS-Firebase-Demo";
