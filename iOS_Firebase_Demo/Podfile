@@ -7,6 +7,7 @@ target 'iOS_Firebase_Demo' do
 
   # Pods for iOS_Firebase_Demo
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
   target 'iOS_Firebase_DemoTests' do
     inherit! :search_paths
