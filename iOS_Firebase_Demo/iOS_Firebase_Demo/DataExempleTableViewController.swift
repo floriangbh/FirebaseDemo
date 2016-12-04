@@ -33,6 +33,7 @@ class DataExempleTableViewController: UITableViewController {
 
         self.prepareData()
         self.addObserver()
+        self.prepareAddButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +42,10 @@ class DataExempleTableViewController: UITableViewController {
     }
 
     func prepareData() {
+        print(self, #function)
+        
         ref?.observe(.value, with: { (snapshot) -> Void in
+            print(snapshot.value)
             if let dicRes = snapshot.value as? Dictionary<String, AnyObject>? {
                 self.data = dicRes
             }
@@ -49,17 +53,28 @@ class DataExempleTableViewController: UITableViewController {
     }
     
     func addObserver() {
-//        // Listen for new data in the Firebase database
-//        self.ref?.observe(.childAdded, with: { (snapshot) -> Void in
-//            self.data.append(snapshot)
-//            self.tableView.insertRows(at: [IndexPath(row: self.comments.count-1, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
-//        })
-//        // Listen for deleted data in the Firebase database
-//        self.ref?.observe(.childRemoved, with: { (snapshot) -> Void in
-//            let index = self.indexOfMessage(snapshot)
-//            self.comments.remove(at: index)
-//            self.tableView.deleteRows(at: [IndexPath(row: index, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
-//        })
+        print(self, #function)
+        
+        // Listen for new data in the Firebase database
+        self.ref?.observe(.childChanged, with: { (snapshot) -> Void in
+            self.prepareData()
+        })
+    }
+    
+    func prepareAddButton() {
+        print(self, #function)
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add,
+                                        target: self,
+                                        action: #selector(self.addChild))
+        self.navigationItem.rightBarButtonItem = addButton
+    }
+    
+    func addChild() {
+        print(self, #function)
+        
+        let count = self.dataKey?.count ?? 0
+        self.ref?.child("id_\(count)").setValue("User\(count)")
     }
     
     // MARK: - Table view data source
