@@ -16,9 +16,10 @@ class DataExempleTableViewController: UITableViewController {
     fileprivate var dataKey: [String]?
     fileprivate var data: Dictionary<String, AnyObject>? {
         didSet {
-            // Get data keys array
+            // Get sorted data keys array
             let lazyMapCollection = self.data!.keys
-            self.dataKey = Array(lazyMapCollection) as [String]
+            let keyArray = Array(lazyMapCollection) as [String]
+            self.dataKey = keyArray.sorted { $0 < $1 }
 
             // Reload data
             self.tableView.reloadData()
@@ -80,5 +81,9 @@ class DataExempleTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 }
