@@ -45,7 +45,6 @@ class DataExempleTableViewController: UITableViewController {
         print(self, #function)
         
         ref?.observe(.value, with: { (snapshot) -> Void in
-            print(snapshot.value)
             if let dicRes = snapshot.value as? Dictionary<String, AnyObject>? {
                 self.data = dicRes
             }
