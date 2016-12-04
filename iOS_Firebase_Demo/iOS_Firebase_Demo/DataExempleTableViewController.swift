@@ -11,16 +11,27 @@ import Firebase
 
 class DataExempleTableViewController: UITableViewController {
     
-    var ref: FIRDatabaseReference!
+    fileprivate let reuseIdentifier = "dataCellIdentifier"
+    fileprivate var ref: FIRDatabaseReference?
+    fileprivate var dataKey: [String]?
+    fileprivate var data: Dictionary<String, AnyObject>? {
+        didSet {
+            // Get data keys array
+            let lazyMapCollection = self.data!.keys
+            self.dataKey = Array(lazyMapCollection) as [String]
+
+            // Reload data
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ref = FIRDatabase.database().reference()
+        self.ref = FIRDatabase.database().reference()
 
-        ref.observe(.value, with: { (snapshot) -> Void in
-            print(snapshot.value ?? "There is no data !")
-        })
+        self.prepareData()
+        self.addObserver()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,13 +39,46 @@ class DataExempleTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func prepareData() {
+        ref?.observe(.value, with: { (snapshot) -> Void in
+            if let dicRes = snapshot.value as? Dictionary<String, AnyObject>? {
+                self.data = dicRes
+            }
+        })
+    }
+    
+    func addObserver() {
+//        // Listen for new data in the Firebase database
+//        self.ref?.observe(.childAdded, with: { (snapshot) -> Void in
+//            self.data.append(snapshot)
+//            self.tableView.insertRows(at: [IndexPath(row: self.comments.count-1, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
+//        })
+//        // Listen for deleted data in the Firebase database
+//        self.ref?.observe(.childRemoved, with: { (snapshot) -> Void in
+//            let index = self.indexOfMessage(snapshot)
+//            self.comments.remove(at: index)
+//            self.tableView.deleteRows(at: [IndexPath(row: index, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
+//        })
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.data?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier,
+                                                 for: indexPath)
+        if let key = self.dataKey?[indexPath.row] {
+            cell.detailTextLabel?.text = self.data?[key] as? String
+            cell.textLabel?.text = key
+        }
+        
+        return cell
     }
 }
