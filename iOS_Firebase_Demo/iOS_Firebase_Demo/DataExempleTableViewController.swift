@@ -17,11 +17,9 @@ class DataExempleTableViewController: UITableViewController {
         super.viewDidLoad()
 
         ref = FIRDatabase.database().reference()
-        
-        // Listen for new comments in the Firebase database
-        ref.observe(.childAdded, with: { (snapshot) -> Void in
-//            self.comments.append(snapshot)
-//            self.tableView.insertRows(at: [IndexPath(row: self.comments.count-1, section: self.kSectionComments)], with: UITableViewRowAnimation.automatic)
+
+        ref.observe(.value, with: { (snapshot) -> Void in
+            print(snapshot.value ?? "There is no data !")
         })
     }
 
