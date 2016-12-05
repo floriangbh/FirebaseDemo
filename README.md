@@ -1,6 +1,8 @@
 # FirebaseDemo
 Simple iOS and Android demonstration of Firebase realtime database.
 
+Run the iOS & Android app, play with the add button and see the Firebase's database synchronisation work !
+
 # iOS
 
 To run the iOS exemple :
