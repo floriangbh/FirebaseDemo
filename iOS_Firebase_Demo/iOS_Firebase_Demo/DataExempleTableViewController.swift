@@ -11,10 +11,12 @@ import Firebase
 
 class DataExempleTableViewController: UITableViewController {
     
+    // MARK: Var
+    
     fileprivate let reuseIdentifier = "dataCellIdentifier"
-    fileprivate var ref: FIRDatabaseReference?
-    fileprivate var dataKey: [String]?
-    fileprivate var data: Dictionary<String, AnyObject>? {
+    fileprivate var ref: FIRDatabaseReference? // Database's reference
+    fileprivate var dataKey: [String]? // Contains the key of the data dictionary w
+    fileprivate var data: Dictionary<String, AnyObject>? { // Data
         didSet {
             // Get sorted data keys array
             let lazyMapCollection = self.data!.keys
@@ -25,12 +27,16 @@ class DataExempleTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
+    
+    // MARK: UITableViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Init database reference
         self.ref = FIRDatabase.database().reference()
 
+        // Prepare controller
         self.prepareData()
         self.addObserver()
         self.prepareAddButton()
@@ -40,10 +46,13 @@ class DataExempleTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: Prepare
 
     func prepareData() {
         print(self, #function)
         
+        // Oneshot database
         ref?.observe(.value, with: { (snapshot) -> Void in
             if let dicRes = snapshot.value as? Dictionary<String, AnyObject>? {
                 self.data = dicRes
@@ -63,6 +72,7 @@ class DataExempleTableViewController: UITableViewController {
     func prepareAddButton() {
         print(self, #function)
         
+        // Add the add button
         let addButton = UIBarButtonItem(barButtonSystemItem: .add,
                                         target: self,
                                         action: #selector(self.addChild))
@@ -72,7 +82,10 @@ class DataExempleTableViewController: UITableViewController {
     func addChild() {
         print(self, #function)
         
+        // Key
         let count = self.dataKey?.count ?? 0
+        
+        // Add data into Firebase database
         self.ref?.child("id_\(count)").setValue("User\(count)")
     }
     
@@ -89,6 +102,7 @@ class DataExempleTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier,
                                                  for: indexPath)
+        
         if let key = self.dataKey?[indexPath.row] {
             cell.detailTextLabel?.text = self.data?[key] as? String
             cell.textLabel?.text = key
