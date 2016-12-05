@@ -13,6 +13,9 @@ To run the iOS exemple :
 # Android 
 
 To run the Android exemple with Android Studio : 
+- [Install Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
+- Download the source iOS folder and run `pod install` from the "iOS_Firebase_Demo" directory
+- Open "iOS_Firebase_Demo.xcworkspace" file, press to play ! 
 - Download the lastest version of [Android Studio](https://developer.android.com/studio/index.html)
 -
 
