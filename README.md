@@ -11,3 +11,6 @@ To run the iOS exemple :
 - Open "iOS_Firebase_Demo.xcworkspace" file, press to play ! 
 
 # Android 
+
+To run the Android exemple with Android Studio : 
+- 
