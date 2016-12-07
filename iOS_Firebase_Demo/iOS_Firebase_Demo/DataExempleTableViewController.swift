@@ -33,8 +33,7 @@ class DataExempleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Init database reference
-        self.ref = FIRDatabase.database().reference()
+        self.ref = FIRDatabase.database().reference() // Init database reference
 
         // Prepare controller
         self.prepareData()

@@ -132,9 +132,9 @@
 				760DE2F91DEC8AB300D6EE15 /* AppDelegate.swift */,
 				76129BB01DF2079700AD56CC /* DataExempleTableViewController.swift */,
 				760DE2FD1DEC8AB300D6EE15 /* Main.storyboard */,
-				760DE3001DEC8AB300D6EE15 /* Assets.xcassets */,
 				760DE3021DEC8AB300D6EE15 /* LaunchScreen.storyboard */,
 				760DE3051DEC8AB300D6EE15 /* Info.plist */,
+				760DE3001DEC8AB300D6EE15 /* Assets.xcassets */,
 				760DE3271DEC8B0300D6EE15 /* GoogleService-Info.plist */,
 			);
 			path = iOS_Firebase_Demo;
