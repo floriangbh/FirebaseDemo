@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static firebase_demo.fg.com.android_firebase_demo.R.id.user;
+
 public class DataListAdapter extends ArrayAdapter {
 
     private Context context;
@@ -29,6 +31,10 @@ public class DataListAdapter extends ArrayAdapter {
 
     public void addUser(User usr) {
         this.userList.add(usr);
+    }
+
+    public void removeUser(User usr) {
+        this.userList.remove(usr);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class DataListAdapter extends ArrayAdapter {
         idLabel.setText(currentUser.getId());
 
         // User
-        TextView userLabel = (TextView) row.findViewById(R.id.user);
+        TextView userLabel = (TextView) row.findViewById(user);
         userLabel.setText(currentUser.getName());
 
         return row;

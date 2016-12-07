@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                User newUser = new User((String) dataSnapshot.getKey(), (String) dataSnapshot.getValue());
+                Log.d("DELETE", newUser.toString());
+                if (!(listAdapter.getUserList().contains(newUser))) {
+                    listAdapter.removeUser(newUser);
+                    listAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
