@@ -15,12 +15,20 @@ public class DataListAdapter extends ArrayAdapter {
     private ArrayList<User> userList;
     private int layoutRessource;
 
-    public DataListAdapter(Context ctx, int layoutResourceId, ArrayList<User> data) {
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public DataListAdapter(Context ctx, int layoutResourceId) {
         super(ctx, layoutResourceId);
 
-        this.userList = data;
+        this.userList = new ArrayList<User>();
         this.layoutRessource = layoutResourceId;
         this.context = ctx;
+    }
+
+    public void addUser(User usr) {
+        this.userList.add(usr);
     }
 
     @Override
