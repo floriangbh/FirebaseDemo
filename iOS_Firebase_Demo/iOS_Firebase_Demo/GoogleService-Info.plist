@@ -23,15 +23,15 @@
 	<key>STORAGE_BUCKET</key>
 	<string>m2-demo-9b54f.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<false/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:193177053536:ios:7f6ded68bc44e174</string>
 	<key>DATABASE_URL</key>

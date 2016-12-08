@@ -53,8 +53,6 @@ class DataExempleTableViewController: UITableViewController {
     // MARK: Prepare
     
     func prepareData() {
-        print(self, #function)
-        
         // Oneshot database
         self.ref?.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dicRes = snapshot.value as? Dictionary<String, Any>? {
@@ -64,8 +62,6 @@ class DataExempleTableViewController: UITableViewController {
     }
     
     func addObserver() {
-        print(self, #function)
-        
         // Listen for deleted users in the Firebase database
         ref?.observe(.childRemoved, with: { (snapshot) in
             _ = self.data?.removeValue(forKey: snapshot.key)
@@ -80,7 +76,7 @@ class DataExempleTableViewController: UITableViewController {
             self.tableView.reloadData()
         })
         
-        // Listen for add users in the Firebase database
+        // Listen for update users in the Firebase database
         ref?.observe(.childChanged, with: { (snapshot) in
             // Update value
             _ = self.data?.updateValue(snapshot.value ?? "",
@@ -90,8 +86,6 @@ class DataExempleTableViewController: UITableViewController {
     }
     
     func prepareAddButton() {
-        print(self, #function)
-        
         // Add the add button
         let addButton = UIBarButtonItem(barButtonSystemItem: .add,
                                         target: self,
@@ -100,13 +94,16 @@ class DataExempleTableViewController: UITableViewController {
     }
     
     func addChild() {
-        print(self, #function)
-        
-        // Key
+         // Key
         let count = self.dataKey?.count ?? 0
         
         // Add data into Firebase database
         self.ref?.child("id_\(count)").setValue("User\(count)")
+    }
+    
+    func removeChild(key: String) {
+        // Remove child into Firebase database
+        self.ref?.child(key).removeValue()
     }
     
     // MARK: - Table view data source
@@ -133,5 +130,18 @@ class DataExempleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let key = self.dataKey?[indexPath.row] {
+                _ = self.data?.removeValue(forKey: key)
+                self.removeChild(key: key)
+            }
+        }
     }
 }
