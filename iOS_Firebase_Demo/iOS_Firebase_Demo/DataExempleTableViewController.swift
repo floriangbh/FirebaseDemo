@@ -16,44 +16,48 @@ class DataExempleTableViewController: UITableViewController {
     fileprivate let reuseIdentifier = "dataCellIdentifier"
     fileprivate var ref: FIRDatabaseReference? // Database's reference
     fileprivate var dataKey: [String]? // Contains the key of the data dictionary w
-    fileprivate var data: Dictionary<String, AnyObject>? { // Data
+    fileprivate var data: Dictionary<String, Any>? { // Data
         didSet {
             // Get sorted data keys array
-            let lazyMapCollection = self.data!.keys
-            let keyArray = Array(lazyMapCollection) as [String]
-            self.dataKey = keyArray.sorted { $0 < $1 }
-
-            // Reload data
-            self.tableView.reloadData()
+            if let firebaseData = self.data {
+                let lazyMapCollection = firebaseData.keys
+                let keyArray = Array(lazyMapCollection) as [String]
+                self.dataKey = keyArray.sorted {
+                    $0 < $1
+                }
+                
+                // Reload data
+                self.tableView.reloadData()
+            }
         }
     }
     
     // MARK: UITableViewController
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.ref = FIRDatabase.database().reference() // Init database reference
-
+        
         // Prepare controller
         self.prepareData()
         self.addObserver()
         self.prepareAddButton()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     // MARK: Prepare
-
+    
     func prepareData() {
         print(self, #function)
         
         // Oneshot database
-        ref?.observe(.value, with: { (snapshot) -> Void in
-            if let dicRes = snapshot.value as? Dictionary<String, AnyObject>? {
+        self.ref?.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dicRes = snapshot.value as? Dictionary<String, Any>? {
                 self.data = dicRes
             }
         })
@@ -62,9 +66,26 @@ class DataExempleTableViewController: UITableViewController {
     func addObserver() {
         print(self, #function)
         
-        // Listen for new data in the Firebase database
-        self.ref?.observe(.childChanged, with: { (snapshot) -> Void in
-            self.prepareData()
+        // Listen for deleted users in the Firebase database
+        ref?.observe(.childRemoved, with: { (snapshot) in
+            _ = self.data?.removeValue(forKey: snapshot.key)
+            self.tableView.reloadData()
+        })
+        
+        // Listen for add users in the Firebase database
+        ref?.observe(.childAdded, with: { (snapshot) in
+            // Add value
+            _ = self.data?.updateValue(snapshot.value ?? "",
+                                       forKey: snapshot.key)
+            self.tableView.reloadData()
+        })
+        
+        // Listen for add users in the Firebase database
+        ref?.observe(.childChanged, with: { (snapshot) in
+            // Update value
+            _ = self.data?.updateValue(snapshot.value ?? "",
+                                       forKey: snapshot.key)
+            self.tableView.reloadData()
         })
     }
     
@@ -89,11 +110,11 @@ class DataExempleTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.data?.count ?? 0
     }
