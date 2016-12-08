@@ -17,6 +17,6 @@ To run the iOS exemple :
 
 To run the Android exemple with Android Studio : 
 - Download the lastest version of [Android Studio](https://developer.android.com/studio/index.html)
+- Download the Android source folder, import in Android Studio 
 - Replace the Firebase .json file by your own Firebase Android Application file
-- Download the Android source folder ...
-- ....
+- Press the play button !
