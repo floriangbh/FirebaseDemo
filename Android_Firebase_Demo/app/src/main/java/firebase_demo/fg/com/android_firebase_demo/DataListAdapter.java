@@ -33,8 +33,12 @@ public class DataListAdapter extends ArrayAdapter {
         this.userList.add(usr);
     }
 
-    public void removeUser(User usr) {
-        this.userList.remove(usr);
+    public void removeUser(String usrId) {
+        for (User usr : userList) {
+            if (usr.getId().equals(usrId)) {
+                this.userList.remove(usr);
+            }
+        }
     }
 
     @Override
@@ -48,11 +52,6 @@ public class DataListAdapter extends ArrayAdapter {
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
 
@@ -61,7 +60,7 @@ public class DataListAdapter extends ArrayAdapter {
             row = li.inflate(this.layoutRessource, null);
         }
 
-        // Get row data
+        // Get row user
         User currentUser  = getItem(position);
 
         // Id

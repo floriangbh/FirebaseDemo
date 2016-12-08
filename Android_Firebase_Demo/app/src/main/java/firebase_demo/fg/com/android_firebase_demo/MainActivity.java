@@ -37,33 +37,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void getSingleDataShot() {
-        Log.d("MAIN", "PAAAASSS");
-        /*this.mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Read each child
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    User newUser = new User((String) child.getKey(), (String) child.getValue());
-                    Log.d("MAIN", newUser.toString());
-                    listAdapter.addUser(newUser);
-                }
-
-                listAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("MainActivity", "onCancelled", databaseError.toException());
-            }
-        });*/
-
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
-                Log.d("MAIN", "onChildAdded:" + dataSnapshot.getKey());
-                User newUser = new User((String) dataSnapshot.getKey(), (String) dataSnapshot.getValue());
-                Log.d("MAIN", newUser.toString());
+                Log.d("ADDED", "onChildAdded:" + dataSnapshot.getKey());
+                User newUser = new User((String) dataSnapshot.getValue(), (String) dataSnapshot.getKey());
                 if (!(listAdapter.getUserList().contains(newUser))) {
                     listAdapter.addUser(newUser);
                     listAdapter.notifyDataSetChanged();
@@ -72,22 +50,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                Log.d("REMOVED", "");
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                User newUser = new User((String) dataSnapshot.getKey(), (String) dataSnapshot.getValue());
-                Log.d("DELETE", newUser.toString());
-                if (!(listAdapter.getUserList().contains(newUser))) {
-                    listAdapter.removeUser(newUser);
-                    listAdapter.notifyDataSetChanged();
-                }
+                Log.d("DELETE : ", " ");
+                listAdapter.removeUser(dataSnapshot.getKey());
+                listAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                Log.d("CHANGED", "");
             }
 
             @Override
@@ -95,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
+
         mDatabase.addChildEventListener(childEventListener);
     }
 }
