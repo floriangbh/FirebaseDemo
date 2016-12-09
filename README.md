@@ -1,4 +1,4 @@
-# FirebaseDemo
+# Firebase Realtime Database cross platform demonstration
 Simple iOS and Android demonstration of Firebase realtime database.
 
 Run the iOS & Android app, play with the add button and see the Firebase's database synchronisation in action !
