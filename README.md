@@ -11,7 +11,8 @@ To run the iOS exemple :
 - [Install Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
 - Download the iOS source folder and run `pod install` from the "iOS_Firebase_Demo" directory
 - Replace the Firebase .plist file by your own Firebase iOS Application file 
-- Open "iOS_Firebase_Demo.xcworkspace" file, press the play button ! 
+- Open "iOS_Firebase_Demo.xcworkspace" file
+- Press the play button ! 
 
 # Android 
 
