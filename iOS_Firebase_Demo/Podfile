@@ -6,7 +6,7 @@ target 'iOS_Firebase_Demo' do
   use_frameworks!
 
   # Pods for iOS_Firebase_Demo
-  pod 'Firebase/Core'
+  pod 'Firebase/Core', '~> 4.8.0'
   pod 'Firebase/Database'
 
   target 'iOS_Firebase_DemoTests' do

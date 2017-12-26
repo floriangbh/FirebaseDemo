@@ -14,7 +14,7 @@ class DataExempleTableViewController: UITableViewController {
     // MARK: Var
     
     fileprivate let reuseIdentifier = "dataCellIdentifier"
-    fileprivate var ref: FIRDatabaseReference? // Database's reference
+    fileprivate var ref: DatabaseReference? // Database's reference
     fileprivate var dataKey: [String]? // Contains the key of the data dictionary
     fileprivate var data: Dictionary<String, Any>? { // Data
         didSet {
@@ -37,7 +37,7 @@ class DataExempleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.ref = FIRDatabase.database().reference() // Init database reference
+        self.ref = Database.database().reference() // Init database reference
         
         // Prepare controller
         self.prepareData()
@@ -93,8 +93,8 @@ class DataExempleTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = addButton
     }
     
-    func addChild() {
-         // Key
+    @objc func addChild() {
+        // Key
         let count = self.dataKey?.count ?? 0
         
         // Add data into Firebase database
@@ -105,6 +105,9 @@ class DataExempleTableViewController: UITableViewController {
         // Remove child into Firebase database
         self.ref?.child(key).removeValue()
     }
+    
+}
+extension DataExempleTableViewController {
     
     // MARK: - Table view data source
     
@@ -136,7 +139,8 @@ class DataExempleTableViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let key = self.dataKey?[indexPath.row] {
                 _ = self.data?.removeValue(forKey: key)
