@@ -45,11 +45,6 @@ class DataExempleTableViewController: UITableViewController {
         self.prepareAddButton()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // MARK: Prepare
     
     func prepareData() {
@@ -64,45 +59,34 @@ class DataExempleTableViewController: UITableViewController {
     func addObserver() {
         // Listen for deleted users in the Firebase database
         ref?.observe(.childRemoved, with: { (snapshot) in
-            _ = self.data?.removeValue(forKey: snapshot.key)
+            self.data?.removeValue(forKey: snapshot.key)
             self.tableView.reloadData()
         })
         
         // Listen for add users in the Firebase database
         ref?.observe(.childAdded, with: { (snapshot) in
-            // Add value
-            _ = self.data?.updateValue(snapshot.value ?? "",
-                                       forKey: snapshot.key)
+            self.data?.updateValue(snapshot.value ?? "", forKey: snapshot.key)
             self.tableView.reloadData()
         })
         
         // Listen for update users in the Firebase database
         ref?.observe(.childChanged, with: { (snapshot) in
-            // Update value
-            _ = self.data?.updateValue(snapshot.value ?? "",
-                                       forKey: snapshot.key)
+            self.data?.updateValue(snapshot.value ?? "", forKey: snapshot.key)
             self.tableView.reloadData()
         })
     }
     
     func prepareAddButton() {
-        // Add the add button
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add,
-                                        target: self,
-                                        action: #selector(self.addChild))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addChildToDatabase))
         self.navigationItem.rightBarButtonItem = addButton
     }
     
-    @objc func addChild() {
-        // Key
+    @objc func addChildToDatabase() {
         let count = self.dataKey?.count ?? 0
-        
-        // Add data into Firebase database
         self.ref?.child("id_\(count)").setValue("User\(count)")
     }
     
     func removeChild(key: String) {
-        // Remove child into Firebase database
         self.ref?.child(key).removeValue()
     }
     
@@ -120,14 +104,10 @@ extension DataExempleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier,
-                                                 for: indexPath)
-        
-        if let key = self.dataKey?[indexPath.row] {
-            cell.detailTextLabel?.text = self.data?[key] as? String
-            cell.textLabel?.text = key
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier, for: indexPath)
+        guard let key = self.dataKey?[indexPath.row] else { return cell }
+        cell.detailTextLabel?.text = self.data?[key] as? String
+        cell.textLabel?.text = key
         return cell
     }
     
@@ -139,13 +119,9 @@ extension DataExempleTableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView,
-                            commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if let key = self.dataKey?[indexPath.row] {
-                _ = self.data?.removeValue(forKey: key)
-                self.removeChild(key: key)
-            }
-        }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard  editingStyle == .delete, let key = self.dataKey?[indexPath.row] else { return }
+        self.data?.removeValue(forKey: key)
+        self.removeChild(key: key)
     }
 }
