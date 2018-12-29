@@ -7,6 +7,8 @@ Run the iOS & Android app, play with the add button and see the Firebase's datab
 
 # iOS
 
+Requirement : Xcode 10+, Cocoapods, Swift 4.2
+
 To run the iOS exemple :
 - [Install Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
 - Download the iOS source folder and run `pod install` from the "iOS_Firebase_Demo" directory
@@ -15,6 +17,8 @@ To run the iOS exemple :
 - Press the play button ! 
 
 # Android 
+
+Requirement : Android Studio 3.1+, Kotlin 
 
 To run the Android exemple with Android Studio : 
 - Download the lastest version of [Android Studio](https://developer.android.com/studio/index.html)
