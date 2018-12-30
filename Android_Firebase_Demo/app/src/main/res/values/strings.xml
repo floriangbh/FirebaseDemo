@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Android_Firebase_Demo</string>
+    <string name="app_name">Firebase</string>
+    <string name="action_settings">Settings</string>
 </resources>

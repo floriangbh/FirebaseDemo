@@ -24,5 +24,5 @@ Requirement : Android Studio 3.1+, Kotlin
 To run the Android exemple with Android Studio : 
 - Download the lastest version of [Android Studio](https://developer.android.com/studio/index.html)
 - Download the Android source folder, import in Android Studio 
-- Replace the Firebase .json file by your own Firebase Android Application file
+- Replace the Firebase google-services.json file (in the app folder) by your own Firebase Android Application file
 - Press the play button !
