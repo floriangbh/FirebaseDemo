@@ -10,7 +10,7 @@ Run the iOS & Android app, play with the add button and see the Firebase's datab
 
 Requirement : Flutter 1.0
 
-To run the iOS exemple :
+To run the Flutter exemple :
 - [Install Flutter](https://flutter.io/docs/get-started/install)
 - Download the Flutter source folder
 - Replace the Firebase .plist (ios/Runner/) and .json (android/app/) file by your own Firebase application file
