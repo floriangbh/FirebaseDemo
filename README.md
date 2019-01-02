@@ -4,7 +4,7 @@ Simple iOS and Android demonstration of Firebase realtime database.
 
 Run the iOS & Android app, play with the add button and see the Firebase's database synchronisation in action !
 
-[![Preview](https://github.com/terflogag/FirebaseDemo/blob/master/video.png)](https://vimeo.com/194874202)
+[![Preview](https://github.com/terflogag/FirebaseDemo/blob/master/video.png)](https://vimeo.com/309135831)
 
 # Flutter
 
