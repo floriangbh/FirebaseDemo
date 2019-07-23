@@ -8,7 +8,7 @@ Run the iOS & Android app, play with the add button and see the Firebase's datab
 
 # Flutter
 
-Requirement : Flutter 1.0
+Requirement : Flutter 1.7.9
 
 To run the Flutter exemple :
 - [Install Flutter](https://flutter.io/docs/get-started/install)
@@ -19,7 +19,7 @@ To run the Flutter exemple :
 
 # iOS
 
-Requirement : Xcode 10+, Cocoapods, Swift 4.2
+Requirement : Xcode 10+, Cocoapods, Swift 5.0
 
 To run the iOS exemple :
 - [Install Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
@@ -30,7 +30,7 @@ To run the iOS exemple :
 
 # Android 
 
-Requirement : Android Studio 3.1+, Kotlin 
+Requirement : Android Studio 3.4+, Kotlin 
 
 To run the Android exemple with Android Studio : 
 - Download the lastest version of [Android Studio](https://developer.android.com/studio/index.html)
