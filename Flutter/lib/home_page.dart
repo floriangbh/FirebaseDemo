@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   void _addNewItem() {
     setState(() {
-      var count = itemList.length;
+      var count = itemList.length + 1;
       ItemData item = ItemData("id_$count", "User$count");
       itemReference.child(item.identifier).set(item.name);
     });
