@@ -83,7 +83,7 @@ class DataExempleTableViewController: UITableViewController {
     
     @objc func addChildToDatabase() {
         let count = self.dataKey?.count ?? 0
-        self.ref?.child("id_\(count)").setValue("User\(count)")
+        self.ref?.child("id_\(count + 1)").setValue("User\(count)")
     }
     
     func removeChild(key: String) {
