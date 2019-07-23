@@ -1,22 +1,7 @@
-# Uncomment the next line to define a global platform for your project
 platform :ios, '10.0'
 
 target 'iOS_Firebase_Demo' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for iOS_Firebase_Demo
-  pod 'Firebase/Core', '~> 5.15.0'
-  pod 'Firebase/Database'
-
-  target 'iOS_Firebase_DemoTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'iOS_Firebase_DemoUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Database', '~> 6.0.0'
 end
