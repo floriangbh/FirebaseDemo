@@ -3,5 +3,5 @@ platform :ios, '10.0'
 target 'iOS_Firebase_Demo' do
   use_frameworks!
   pod 'Firebase/Core'
-  pod 'Firebase/Database', '~> 6.0.0'
+  pod 'Firebase/Database'
 end

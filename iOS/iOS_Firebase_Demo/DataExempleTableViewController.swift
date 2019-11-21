@@ -14,8 +14,11 @@ class DataExempleTableViewController: UITableViewController {
     // MARK: Var
     
     fileprivate let reuseIdentifier = "dataCellIdentifier"
+    
     fileprivate var ref: DatabaseReference? // Database's reference
+    
     fileprivate var dataKey: [String]? // Contains the key of the data dictionary
+    
     fileprivate var data: Dictionary<String, Any>? { // Data
         didSet {
             // Get sorted data keys array
