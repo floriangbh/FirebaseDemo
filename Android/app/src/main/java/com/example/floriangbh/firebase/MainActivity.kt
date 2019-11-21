@@ -12,9 +12,15 @@ import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
 
-    var itemAdapter: ItemAdapter? = null
-    var items: ArrayList<ItemData> = ArrayList()
-    var databaseReference: DatabaseReference? = null
+    // Var
+
+    private var itemAdapter: ItemAdapter? = null
+
+    private var items: ArrayList<ItemData> = ArrayList()
+
+    private var databaseReference: DatabaseReference? = null
+
+    // Lifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +38,13 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         val adapter = itemAdapter ?: return
-        var databaseRef = databaseReference ?: return
+        val databaseRef = databaseReference ?: return
         databaseRef.addChildEventListener(FirebaseEventListener(adapter))
     }
 
-    fun itemClicked(item: ItemData) {
+    // Action
+
+    private fun itemClicked(item: ItemData) {
         println(item.id)
     }
 }

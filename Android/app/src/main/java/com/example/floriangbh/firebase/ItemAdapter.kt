@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class ItemAdapter (val partItemList: ArrayList<ItemData>, val clickListener: (ItemData) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ItemAdapter (val partItemList: ArrayList<ItemData>, private val clickListener: (ItemData) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
