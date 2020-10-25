@@ -29,10 +29,10 @@ To run the iOS exemple :
 
 # Android 
 
-Requirement : Android Studio 3.5+, Kotlin 
+Requirement : Android Studio 4.1+, Kotlin 
 
 To run the Android exemple with Android Studio : 
 - Download the lastest version of [Android Studio](https://developer.android.com/studio/index.html)
-- Download the "Android" source folder, import in Android Studio 
-- Replace the Firebase google-services.json file (in the app folder) by your own Firebase Android Application file
+- Import the `Android` source folder in Android Studio 
+- Replace the Firebase google-services.json file (in the app folder) by your own Firebase json 
 - Press the play button !

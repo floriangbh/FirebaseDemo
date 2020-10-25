@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         databaseReference = database.reference
 
         item_recycler.layoutManager = LinearLayoutManager(this)
-        itemAdapter = ItemAdapter(items, { partItem : ItemData -> itemClicked(partItem) })
+        itemAdapter = ItemAdapter(items) { partItem: ItemData -> itemClicked(partItem) }
         itemAdapter.let { item_recycler.adapter = it }
     }
 
