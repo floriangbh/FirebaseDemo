@@ -1,6 +1,6 @@
 # Firebase Realtime Database with Swift, Kotlin & Dart (Flutter)
 
-Simple iOS and Android demonstration of Firebase realtime database.
+Simple iOS and Android demonstration of [Firebase realtime database](https://firebase.google.com/docs/database).
 
 Run the iOS & Android app, play with the add button and see the Firebase's database synchronisation in action !
 
@@ -19,13 +19,12 @@ To run the Flutter exemple :
 
 # iOS
 
-Requirement : Xcode 11+, Cocoapods, Swift 5.1
+Requirement : Xcode 12.1+, Swift 5.3
 
 To run the iOS exemple :
-- [Install Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
-- Download the iOS source folder and run `pod install` from the "iOS" folder
 - Replace the Firebase .plist file by your own Firebase iOS Application file 
-- Open "iOS_Firebase_Demo.xcworkspace" file
+- Open `iOS_Firebase_Demo.xcodeproj` file
+- Let Xcode fetch the SPM dependencies 
 - Press the play button ! 
 
 # Android 

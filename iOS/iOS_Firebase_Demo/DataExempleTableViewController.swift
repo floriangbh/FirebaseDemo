@@ -13,13 +13,13 @@ class DataExempleTableViewController: UITableViewController {
     
     // MARK: Var
     
-    fileprivate let reuseIdentifier = "dataCellIdentifier"
+    private let reuseIdentifier = "dataCellIdentifier"
     
-    fileprivate var ref: DatabaseReference? // Database's reference
+    private var ref: DatabaseReference? // Database's reference
     
-    fileprivate var dataKey: [String]? // Contains the key of the data dictionary
+    private var dataKey: [String]? // Contains the key of the data dictionary
     
-    fileprivate var data: Dictionary<String, Any>? { // Data
+    private var data: Dictionary<String, Any>? { // Data
         didSet {
             // Get sorted data keys array
             if let firebaseData = self.data {
@@ -35,7 +35,7 @@ class DataExempleTableViewController: UITableViewController {
         }
     }
     
-    // MARK: UITableViewController
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class DataExempleTableViewController: UITableViewController {
     
     // MARK: Prepare
     
-    func prepareData() {
+    private func prepareData() {
         // Oneshot database
         self.ref?.observeSingleEvent(of: .value, with: { (snapshot) in
             if let dicRes = snapshot.value as? Dictionary<String, Any>? {
@@ -59,7 +59,7 @@ class DataExempleTableViewController: UITableViewController {
         })
     }
     
-    func addObserver() {
+    private func addObserver() {
         // Listen for deleted users in the Firebase database
         ref?.observe(.childRemoved, with: { (snapshot) in
             self.data?.removeValue(forKey: snapshot.key)
@@ -79,7 +79,7 @@ class DataExempleTableViewController: UITableViewController {
         })
     }
     
-    func prepareAddButton() {
+    private func prepareAddButton() {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addChildToDatabase))
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -89,7 +89,7 @@ class DataExempleTableViewController: UITableViewController {
         self.ref?.child("id_\(count + 1)").setValue("User\(count)")
     }
     
-    func removeChild(key: String) {
+    private func removeChild(key: String) {
         self.ref?.child(key).removeValue()
     }
     
